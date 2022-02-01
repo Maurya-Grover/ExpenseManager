@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React /* useState*/ from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
 import Card from '../UI/Card';
 const ExpenseItem = (props) => {
+	// now this is a stateless/presentational/dumb component
+	// state was only added for demo and any component
+	// that has state is called a stateful/smart component
 	// to manage state for that particular variable
-	const [title, setTitle] = useState(props.title);
-	const clickHandler = () => {
-		setTitle('New Value');
-	};
+	// const [title, setTitle] = useState(props.title);
+	// const clickHandler = () => {
+	// 	setTitle('New Value');
+	// };
 	return (
 		<Card className="expense-item">
 			{/*
@@ -21,10 +24,10 @@ const ExpenseItem = (props) => {
 				<ExpenseDate date={props.date} />
 			</div>
 			<div className="expense-item__description">
-				<h2>{title}</h2>
+				<h2>{props.title}</h2>
 			</div>
 			<div className="expense-item__price">${props.amount}</div>
-			<button onClick={clickHandler}>Change title</button>
+			{/*<button onClick={clickHandler}>Change title</button>*/}
 		</Card>
 	);
 };
