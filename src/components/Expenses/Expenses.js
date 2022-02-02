@@ -12,15 +12,56 @@ const Expenses = (props) => {
 		setFilteredYear(selectedYear);
 	};
 
+	const filteredExpenses = props.expenses.filter(
+		(expense) => expense.date.getFullYear().toString() === filteredYear
+	);
+	let expensesContent = <p>No Expenses Found</p>;
+	if (filteredExpenses.length > 0) {
+		expensesContent = filteredExpenses.map((expense) => (
+			<ExpenseItem
+				key={expense.id}
+				title={expense.title}
+				amount={expense.amount}
+				date={expense.date}
+			/>
+		));
+	}
+
 	return (
 		<Card className="expenses">
 			<ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-			<ExpenseItem title={props.expenses[0].title} amount={props.expenses[0].amount} date={props.expenses[0].date} />
-			<ExpenseItem title={props.expenses[1].title} amount={props.expenses[1].amount} date={props.expenses[1].date} />
-			<ExpenseItem title={props.expenses[2].title} amount={props.expenses[2].amount} date={props.expenses[2].date} />
-			<ExpenseItem title={props.expenses[3].title} amount={props.expenses[3].amount} date={props.expenses[3].date} />
+			{expensesContent}
 		</Card>
 	);
 };
 
+/* {filteredExpenses.length === 0 ? (
+				<p>No Expenses Found</p>
+			) : (
+				filteredExpenses.map((expense) => (
+					<ExpenseItem
+						key={expense.id}
+						title={expense.title}
+						amount={expense.amount}
+						date={expense.date}
+					/>
+				))
+			)} */
+/*both the ^ and below approaches are fine to use because of lazy 'and' check in javascript.
+if first clause fails second clause is not even checked. If first passes, then second 
+clause is executed and returned and that can be used to return JSX code.
+
+even better approach though is to pull logic out of the the returned JSX component completely
+like done above*/
+
+/* filteredExpenses.length === 0 && <p>No Expenses Found</p>*/
+/* {filteredExpenses.length > 0 &&
+				filteredExpenses.map((expense) => (
+					<ExpenseItem
+						key={expense.id}
+						title={expense.title}
+						amount={expense.amount}
+						date={expense.date}
+					/>
+				))} */
 export default Expenses;
