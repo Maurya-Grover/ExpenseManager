@@ -3,6 +3,7 @@ import Card from '../UI/Card';
 import ExpenseList from './ExpenseList';
 import ExpenseFilter from './ExpenseFilter';
 import './Expenses.css';
+
 const Expenses = (props) => {
 	// parent component(Expenses) controls the value and changes to the value
 	// of child component(ExpensesFilter) the management of that is not done
